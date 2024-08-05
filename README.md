@@ -10,12 +10,13 @@ git clone Repo: > Local copy
 
 Browser change ReadMe.md 
 : Local Un-sycnd
-git fetch + git pull: < Local Syncd
+git fetch + git pull: > Local Syncd
 
 VCS change ReadMe.md 
 : Repo Un-sycnd
 GH Desktop : Select changes
-, Enter message, description
+, Enter message/ description
 , Commit to patch-1 
+, Push origin
 
 ```
