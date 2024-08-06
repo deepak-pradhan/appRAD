@@ -1,10 +1,11 @@
 # appRAD
-# Lorem ipsum ....      
 
+
+### Git & GH basic familarization  
+---  
+24.08.05:    
 
 ```yaml
-24.08.05: 
-
 Created Repo (appRAD)
 git clone Repo: > Local copy
 
@@ -20,3 +21,53 @@ GH Desktop : Select changes
 , Push origin
 
 ```
+
+
+### Install Flask   
+---   
+24.08.05   
+
+```bash
+$ cd appRAD
+
+$ python3 -m venv .venv
+$ . .venv/bin/activate
+
+$ (.venv) pip install --upgrade pip
+$ (.venv) pip install Flask
+```
+
+
+
+### Skeleton   
+---   
+24.08.05   
+
+```py
+''' rad.app.py
+'''
+
+from flask import Flask
+
+def create_app ( environment ):
+    app = Flask(__name__)
+    return app
+```
+
+```py
+''' run.py
+Usage: $ python run.py
+'''
+
+from rad.app import create_app
+app = create_app( environment = 'DEV')
+
+@app.route("/")
+def hello():
+    return "Hello! This is the skeletion!"
+
+if __name__ == "__main__":
+    app.run(port=5000, debug=True)   
+```    
+
+[Test: http://127.0.0.1:5000/](http://127.0.0.1:5000/)
