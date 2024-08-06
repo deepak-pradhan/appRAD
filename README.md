@@ -43,6 +43,14 @@ $ (.venv) pip install Flask
 ---   
 24.08.05   
 
+<pre>
+/appRAD
+├── run.py
+├── /rad
+│   ├── app.py
+</pre>
+
+
 ```py
 ''' rad.app.py
 '''
@@ -70,4 +78,7 @@ if __name__ == "__main__":
     app.run(port=5000, debug=True)   
 ```    
 
-[Test: http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+[Test: http://127.0.0.1:5000/](http://127.0.0.1:5000/)   
+o/p: "Hello! This is the skeletion!"
+
+Commit!
