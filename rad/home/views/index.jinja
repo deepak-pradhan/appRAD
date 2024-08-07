@@ -1,0 +1,31 @@
+<title>{{title}}</title>
+
+<div class="nav">
+    {%- for label in documents %}
+        {% set route = documents[label] -%}
+        <a class="btn btn-primary" href="{{route}}">{{label}}</a> &nbsp;&nbsp;
+    {%- endfor -%}    
+</div>
+
+    
+    <pre>
+    index.html
+
+    Group 1: URLs for Home routes / bp Home:
+    <a href="{{ url_for('bp_home.index') }}">Home</a>
+    <a href="{{ url_for('bp_home.about') }}">About</a>
+    <a href="{{ url_for('bp_home.contact') }}">Contact</a>
+
+
+    Group 2: URLs for Auth routes / bp Auth:
+    <a href="{{ url_for('bp_auth.index') }}">Auth-indx</a> or <a href="/auth/">index</a>
+    <a href="{{ url_for('bp_auth.register') }}">Register</a> or <a href="/auth/register">Register</a>
+    <a href="{{ url_for('bp_auth.login') }}">Login</a> or <a href="/auth/login">login</a>
+
+    Group 3: URLs for Doc
+    <a href="{{ url_for('bp_doc.doc') }}">Doc - Index</a>
+    <a href="/doc/index">Index</a>
+    <a href="/doc/page1">Page1</a>
+
+   ...
+    </pre>
