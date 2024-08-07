@@ -186,15 +186,15 @@ Scenario: Routes - Modulars / Blueprints
 Given that my routes are augmented & Organized
 
 Then I must create 3/4 Modules under f[rad]:
-    | Module    | ns.path   | BluePrints routes     | views |
+    | Module    | ns.path   | BluePrints routes     | Views |
     | --------- | ----------| --------------------- |       |
-    | Home      | rad.home  | index, about, contact |       |
-    | Auth      | rad.auth  | register, login, ...  |       |
-    | Errors    | -- ? --   | error401, error402, ..|       |
-    | Doc       | rad.doc   | index, render_md      |       |
+    | Home      | rad.home  | index, about, contact |  y    |
+    | Auth      | rad.auth  | register, login, ...  |  y    |
+    | Errors    | -- ? --   | error401, error402, ..|  -    |
+    | Doc       | rad.doc   | index, render_md      |  y    |
  and Then Create __init__.py and routes.py for each module
- and Then Add the respective routes module
- and Then Test route URLs from index page
+ and Then Add some respective routes to the module
+ and Then Test URLs from index page
 
 ```
 
@@ -236,23 +236,22 @@ bp = Blueprint('home', __name__)
 ### 2. Create rad.auth.routes.py
 ```py
 """ rad.auth.routes.py """
-from flask import render_template, request, redirect, url_for
+from flask import render_template
 from rad.auth import bp as auth_bp
 
 @auth_bp.route('/register', methods=['GET','POST'])
 def register():
-    return render_template('register.html', title='Register')
+    return render_template('register.j2', title='Register')
 
 @auth_bp.route('/login', methods=['GET','POST'])
 def login():
-    return render_template('login.html', title='Login')
-
+    return render_template('login.j2', title='Login')
 
 @auth_bp.route('/forgot-password', methods=['GET','POST'])
-    return render_template('forgot-password.html', title='Forgot Password')
+    return render_template('forgot-password.j2', title='Forgot Password')
 
 @auth_bp.route('/reset-password', methods=['GET','POST'])
-    return render_template('reset-password.html', title='Reset Password')
+    return render_template('reset-password.j2', title='Reset Password')
 ```
 
 ### 3. Import auth_bp Blueprint to rad.app.py
@@ -301,6 +300,9 @@ def hello():
     Group 3: URLs for Errors routes / bp Errors:
     <a href={url_for('errors/4xx/error_404')}>404</a>
     ...
+
+    Group 4: URLs for Docs / bp Doc:
+    <a href={url_for('doc')}>Docs</a>...
     </pre>
     '''
 
