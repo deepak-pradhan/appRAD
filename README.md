@@ -158,7 +158,43 @@ def hello():
     ...
     </pre>
     '''
+@app.route('/about')
+def about():
+    return """Okay, about!"""
 
+@app.route("/contact")
+def contact():
+    return """Okay, contacted"""
+
+# Routes/Controllers for Authentication
+@app.route('/auth/register')
+def register():
+    return """registered, please verify your email address"""
+
+@app.route("/auth/verify-email")
+def verify_email():
+    return """verified email-registration"""
+
+@app.route('/auth/login')
+def login():
+    return """logged in"""
+
+# Routes/Controllers for User
+@app.route("/user")
+def user():
+    return """user"""
+
+@app.route('/admin')
+def admin():
+    return """admin"""
+
+@app.route("/role")
+def role():
+    return """role"""
+
+@app.route("/profile")
+def profile():
+    return """profile"""
 
 # Starts app
 if __name__ == "__main__":
