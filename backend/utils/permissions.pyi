@@ -1,0 +1,3 @@
+from fastapi import Request
+
+def check_permission(request: Request, permission: str) -> None: ...
