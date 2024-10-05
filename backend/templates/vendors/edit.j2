@@ -1,0 +1,55 @@
+<h2 class="title is-4">Edit Tenant</h2>
+<form hx-post="{{ url_for('update_tenant', id=tenant.id) }}" hx-target="#tenant-list" hx-swap="outerHTML">
+    <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+            <input class="input" type="text" name="name" value="{{ tenant.name }}" required>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Domain</label>
+        <div class="control">
+            <input class="input" type="text" name="domain" value="{{ tenant.domain }}" required>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Schema Name</label>
+        <div class="control">
+            <input class="input" type="text" name="schema_name" value="{{ tenant.schema_name }}" required>
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Max Users</label>
+        <div class="control">
+            <input class="input" type="number" name="max_users" value="{{ tenant.max_users or '' }}">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Subscription Plan</label>
+        <div class="control">
+            <input class="input" type="text" name="subscription_plan" value="{{ tenant.subscription_plan or '' }}">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Contact Email</label>
+        <div class="control">
+            <input class="input" type="email" name="contact_email" value="{{ tenant.contact_email or '' }}">
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <label class="checkbox">
+                <input type="checkbox" name="is_active" {% if tenant.is_active %}checked{% endif %}>
+                Active
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-primary" type="submit">
+                <span class="icon"><i class="fas fa-save"></i></span>
+                <span>Update Tenant</span>
+            </button>
+        </div>
+    </div>
+</form>

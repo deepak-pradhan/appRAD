@@ -18,8 +18,8 @@ app = FastAPI()
 
 @app.get("/")
 async def index(db: Session):
-    tenants = Tenant.all(db)
-    return {"message": f"Tenant {tenants}"}
+    vendors = Tenant.all(db)
+    return {"message": f"Tenant {vendors}"}
 
 @app.get("/tenant/{id}")
 def get_tenant(id: int, db: Session):

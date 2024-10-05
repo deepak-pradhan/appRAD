@@ -1,6 +1,6 @@
 from sqlalchemy import or_
 from sqlmodel import select
-from utils.exceptions import CustomHTTPException
+from backend.utils.exceptions import CustomHTTPException
 
 def apply_filters(query, filters):
     try:

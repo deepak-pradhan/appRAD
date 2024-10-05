@@ -1,0 +1,32 @@
+{% extends "_layouts/base.j2" %}
+{% block content %}
+<section class="section">
+    <div id="vendors-list">
+        <ul hx-get="/vendors" hx-push="true" hx-target="#vendors-list"></ul>
+        {{ models }}
+    </div>
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const htmx = new Htmx();
+        htmx.init();
+
+        // Listen for HTMX push events
+        document.addEventListener("htmx:push", function (event) {
+            // Get the pushed HTML content
+            const pushedHtml = event.detail.html;
+
+            // Append the pushed content to the #vendors-list element
+            const vendorsListElement = document.getElementById("vendors-list");
+            vendorsListElement.innerHTML += pushedHtml;
+        });
+    });
+
+    // Initialize HTMX on the page
+    document.addEventListener("DOMContentLoaded", function () {
+        const htmx = new Htmx();
+        htmx.init();
+    });
+</script>
+{% endblock %}

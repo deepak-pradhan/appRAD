@@ -3,9 +3,9 @@ from db.databases import engine
 from datetime import datetime, timezone
 from sqlmodel import SQLModel, create_engine, Session
 
-def load_sample_tenants():
+def load_sample_vendors():
     with Session(engine) as db:
-        sample_tenants = [
+        sample_vendors = [
             {
                 "name": "Acme Corp",
                 "domain": "acme.com",
@@ -34,7 +34,7 @@ def load_sample_tenants():
             }
         ]
 
-        for tenant_data in sample_tenants:
+        for tenant_data in sample_vendors:
             try:
                 tenant = Tenant(**tenant_data, rec_type="tenant")
                 tenant.generate_api_key()
@@ -48,5 +48,5 @@ def load_sample_tenants():
                 import traceback
                 print(traceback.format_exc())
 
-        print("Sample tenants loaded successfully.")
-        print("Sample tenants loaded successfully.")
+        print("Sample vendors loaded successfully.")
+        print("Sample vendors loaded successfully.")
