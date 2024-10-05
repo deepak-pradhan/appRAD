@@ -1,0 +1,16 @@
+<nav aria-label="breadcrumb" style="display: flex; align-items: center;">
+  <ol class="breadcrumb" style="display: flex; list-style: none; padding: 0; margin: 0;">
+    {% for crumb in request.state.breadcrumbs %}
+      {% if loop.last %}
+        <li class="breadcrumb-item active" aria-current="page" style="margin-right: 10px;">
+          {{ crumb.title }}
+          {% if crumb.route_name %}
+            <small style="margin-left: 5px;">({{ crumb.route_name }})</small>
+          {% endif %}
+        </li>
+      {% else %}
+        <li class="breadcrumb-item" style="margin-right: 10px;"><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ol>
+</nav>

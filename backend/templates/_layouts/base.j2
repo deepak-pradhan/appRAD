@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% with title=title %}
+{% include "_layouts/head.j2" %}
+{% endwith %}
+
+<body>
+  <div class="container">
+    {% include "_layouts/crumb.j2" %}
+    <div class="content" style="padding-top: 1.0em;">
+      {% block content %}
+      <h1>{{ message }}</h1>
+      <section class="section">
+        <div class="container">
+          <h1 class="title is-1">Welcome to the Tenant Management System</h1>
+          <p class="subtitle">Manage your vendors efficiently</p>
+          <a href="{{ url_for('list_vendors') }}" class="button is-primary">View vendors</a>
+        </div>
+      </section>
+      {% endblock %}
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+<script src="{{ url_for('static', path='js/modal.js') }}"></script>
+

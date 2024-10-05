@@ -1,0 +1,7 @@
+{% macro dump_obj(items) -%}
+    <ul>
+    {%- for item in items %}
+        <li><p>{{ item|e }}</p></li>
+    {%- endfor %}
+    </ul>
+{%- endmacro %}
