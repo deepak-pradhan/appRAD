@@ -1,17 +1,7 @@
 from faker import Faker
 fake = Faker()
 
-
 class Address:
-    """
-    Address:
-        address()
-        city()
-        state()
-        country()
-        postcode()
-        street_address()
-    """
     def __init__(self, max=1):
         self.generated = set()
         self.max = max
@@ -25,7 +15,7 @@ class Address:
 
         self.generate_address(self, self.max)
         
-    def generate_address(self, max):
+    def generate_address(self):
         self.full_address= f"{self.building} {self.street_name}, {self.city}, {self.state} - {self.postal}"
         
     def generate(self):

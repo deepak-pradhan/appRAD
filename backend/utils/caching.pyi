@@ -1,3 +1,0 @@
-from typing import Any, Callable
-
-def cache(expire: int = ..., backend: str = ...) -> Callable[[Callable[..., Any]], Callable[..., Any]]: ...

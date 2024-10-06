@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request, Depends
-from fastapi.responses import JSONResponse
 from sqlmodel import Session, select
 from backend.db.db_init import init_db, get_db
 from backend.middlewares.request_logger import RequestLoggingMiddleware
@@ -16,8 +15,9 @@ templates_dir : str = current_dir / "backend" / "templates"
 # Start
 app = FastAPI()
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
-app.add_middleware(RequestLoggingMiddleware, is_request_logging_on=False)
 templates = Jinja2Templates(directory=templates_dir)
+
+app.add_middleware(RequestLoggingMiddleware, is_request_logging_on=False)
 
 # Prep
 @app.on_event("startup")
@@ -27,15 +27,18 @@ def on_startup():
 
 @app.get("/")
 def read_root():
-    return templates.TemplateResponse("index.j2", {"request": Request, "message": "Welcome to Homepage!"})
+    return templates.TemplateResponse("index.j2"
+            , {"request": Request, "message": "Welcome to Homepage!"}
+    )
 
 @app.get("/vendors2")
 async def list_vendors(request: Request
 			, db: Session = Depends(get_db)
-		):
+		):    
     models = db.exec(select(Vendor)).all()
     return templates.TemplateResponse("vendors/list.j2"
-		    , {"request": request, "models": models})
+		    , {"request": request, "models": models}
+    )
 
 if __name__ == "__main__":
     import uvicorn 

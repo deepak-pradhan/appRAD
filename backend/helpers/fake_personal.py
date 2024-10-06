@@ -5,18 +5,7 @@ fake = Faker()
 
 
 class Personal:
-    """
-    Personal:
-        name()
-        first_name()
-        last_name()
-        prefix()
-        suffix()
-        email()
-        phone_number()
-        date_of_birth()
-        ssn()
-    """   
+
     def __init__(self):
         self.generated = set()
         self.name = fake.name()

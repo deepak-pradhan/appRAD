@@ -9,8 +9,7 @@ class fakeThing:
             ):   
              
         data = {
-            'rec_type': rec_type
-            , 'name' : name
+            'name' : name
             , 'alternate_name'   : ''
             , 'additional_types' : 'Renters, Subscribers, ...'
             , 'image': ''
