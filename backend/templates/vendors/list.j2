@@ -2,7 +2,15 @@
 {% block content %}
 <section class="section">
     <div id="models-list">
-        {{ models }}
+        <table>
+        {% for model in models %}
+        <tr>
+            <td>{{ model.name }} </td>
+            <td>{{ model.id}} </td>
+        
+        </tr>
+        {% endfor %}
+        </table>
     </div>
 </section>
 {% endblock %}
