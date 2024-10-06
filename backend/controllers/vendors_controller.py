@@ -1,7 +1,6 @@
 import logging
 from typing import Any, Dict
 
-from fastapi.responses import JSONResponse
 from backend.models.vendor import Vendor
 from backend.controllers.base_controller import BaseController
 from backend.db.databases import get_db
