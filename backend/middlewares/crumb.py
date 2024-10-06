@@ -4,7 +4,7 @@ import inflect
 
 p = inflect.engine()
 
-class BreadcrumbMiddleware(BaseHTTPMiddleware):
+class CrumbMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         path_parts = request.url.path.strip('/').split('/')
         breadcrumbs = [{'title': 'Home', 'url': '/'}]

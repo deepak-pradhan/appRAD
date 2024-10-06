@@ -2,7 +2,7 @@ import logging
 from fastapi import Request
 from starlette.middleware.base import BaseHTTPMiddleware
 
-class RequestLoggingMiddleware(BaseHTTPMiddleware):
+class RequestLoggerMiddleware(BaseHTTPMiddleware):
     def __init__(self
             , app
             , log_level=logging.INFO
