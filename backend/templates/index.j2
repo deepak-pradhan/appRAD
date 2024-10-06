@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tenant List</title>
-    <link rel="stylesheet" href="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.css">
-</head>
-<body>
-    <h1>Tenant List</h1>
-    {# <ul hx-get="/tenant" hx-target="#tenant-list">
-        {% for tenant in vendors %}
-            <li>{{ tenant.name }} ({{ tenant.email }})</li>
-        {% endfor %}
-    </ul> #}
+{% extends "_layouts/base.j2" %}
 
-    <form hx-post="/tenant" hx-target="#tenant-list">
-        <input type="text" name="name" placeholder="Name">
-        <input type="email" name="email" placeholder="Email">
-        <button>Save</button>
-    </form>
+{% block content %}
 
-    <script src="https://unpkg.com/htmx.org@1.7.0/dist/htmx.min.js"></script>
-</body>
-</html>
+  <h1>{{ message }}</h1>
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-1">Tenant Management System ip = {{ ip }}</h1>
+      <p class="subtitle">Manage your vendors efficiently</p>
+    </div>
+  </section>
+
+{% endblock %}

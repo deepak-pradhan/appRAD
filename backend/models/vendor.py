@@ -9,7 +9,6 @@ class Vendor(CModel, table=True):
     email: EmailStr = Field(default=None)
     
     def validate(self) -> None:
-        """Custom validation for the Tenant model"""
         if not self.name:
             raise ValueError("Name cannot be empty")
         if not self.email:
