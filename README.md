@@ -6,15 +6,23 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 
 ![alt text](image.png)
 
-**The Hello World!**  
+**The Hello World!, the Svelte way**  
 ```html
-	<!--Use ternary operator in HTML-->
-	<h2 class="highlight">
-		{data.visited
-	    	? 'Good 2c u again 🤩'
-			: 'Welcome! Glad 2c u 😎'
-		}
-	</h2>
+    <Column class="hero-content">
+        <h1>
+            Hello, <span class="highlight">{data.visited ? 'friend' : 'stranger'}!</span>
+        </h1>
+
+        <!--Use ternary operator in HTML-->
+        <h2 class="highlight">
+            {data.visited
+               ? 'Good 2c u again 🤩'
+               : 'Welcome! Glad 2c u 😎'
+            }
+        </h2>
+
+        <Button href="/get-started" kind="primary" class="custom-button">Get Started</Button>
+    </Column>
 ```                
 
 ## Chat
