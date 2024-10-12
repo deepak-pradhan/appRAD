@@ -1,6 +1,6 @@
 
 # Sandbox 
-_Just got GIT! Exploring the new paradigms after 15+ year no no coding_
+_Just got GIT! Exploring the new paradigms after 15+ year no coding_
 
 ## Landing Page
 
