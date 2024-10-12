@@ -1,12 +1,19 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
+    import { marked } from 'marked';
+    import { Content, Grid, Row, Column, Select, SelectItem, Slider, TextInput, Button, ProgressBar, InlineNotification } from "carbon-components-svelte";
+    
+    interface ChatMessage {
+        role: 'user' | 'assistant';
+        content: string;
+    }
 
-    let chatHistory = [];
+    let chatHistory: ChatMessage[] = [];
     let userInput = '';
     let isLoading = false;
     let selectedModel = 'llama3.1:8b';
     let temperature = 0.7;
     let maxTokens = 100;
+    let errorMessage = '';
 
     const availableModels = ['llama3.1:8b', 'granite-code:8b', 'granite-code:20b', 'codegemma:7b-instruct-fp16', 'codellama:7b', 'codellama:13b'];
 
@@ -14,6 +21,7 @@
         if (!userInput.trim()) return;
 
         isLoading = true;
+        errorMessage = '';
         chatHistory = [...chatHistory, { role: 'user', content: userInput }];
 
         const conversationHistory = chatHistory.map(msg => `${msg.role}: ${msg.content}`);
@@ -30,88 +38,143 @@
                     conversation_history: conversationHistory
                 })
             });
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
             const data = await response.json();
             chatHistory = [...chatHistory, { role: 'assistant', content: data.response }];
         } catch (error) {
             console.error('Error:', error);
+            errorMessage = 'An error occurred while fetching the response. Please try again.';
         } finally {
             isLoading = false;
             userInput = '';
         }
     }
+
+    function formatMessage(content: string) {
+        return marked(content);
+    }
 </script>
 
-<section class="section">
-    <div class="container">
-        <h1 class="title">Chat with AI</h1>
-        <div class="box">
-            <div class="columns">
-                <div class="column">
-                    <div class="field">
-                        <label class="label" for="model-select">Select Model</label>
-                        <div class="control">
-                            <div class="select is-fullwidth">
-                                <select id="model-select" bind:value={selectedModel}>
-                                    {#each availableModels as model}
-                                        <option value={model}>{model}</option>
-                                    {/each}
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label" for="temperature-slider">Temperature: {temperature.toFixed(2)}</label>
-                        <div class="control">
-                            <input id="temperature-slider" type="range" class="slider is-fullwidth" min="0" max="1" step="0.01" bind:value={temperature}>
-                        </div>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="field">
-                        <label class="label" for="max-tokens-slider">Max Tokens: {maxTokens}</label>
-                        <div class="control">
-                            <input id="max-tokens-slider" type="range" class="slider is-fullwidth" min="1" max="500" step="1" bind:value={maxTokens}>
-                        </div>
-                    </div>
-                </div>
-            </div>            
-        </div>
-    </div>
-</section>
+<Content>
+    <Grid>
+        <Row>
+            <Column>
+                <h1>Chat with AI: calls FastAPI's API</h1>
+            </Column>
+        </Row>
 
-<section class="section">
-    <div class="container">
-        <div class="box">
-            <div class="content">
-                {#each chatHistory as message}
-                    <div class={`message ${message.role === 'user' ? 'is-primary' : 'is-info'}`}>
-                        <div class="message-header">
-                            <p>{message.role === 'user' ? 'You' : 'AI'}</p>
-                        </div>
-                        <div class="message-body">
-                            {message.content}
-                        </div>
-                    </div>
-                {/each}
-                {#if isLoading}
-                    <progress class="progress is-small is-primary" max="100">15%</progress>
+        <Row>
+            <Column lg={16}>
+                <Select labelText="Select Model" bind:selected={selectedModel}>
+                    {#each availableModels as model}
+                        <SelectItem value={model} text={model} />
+                    {/each}
+                </Select>
+            </Column>
+        </Row>
+
+        <Row>
+            <Column lg={8}>
+                <Slider 
+                    labelText={`Temperature: ${temperature.toFixed(2)}`}
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    bind:value={temperature}
+                />
+            </Column>
+            <Column lg={8}>
+                <Slider 
+                    labelText={`Max Tokens: ${maxTokens}`}
+                    min={1}
+                    max={500}
+                    step={1}
+                    bind:value={maxTokens}
+                />
+            </Column>
+        </Row>
+
+        <Row>
+            <Column>
+                {#if errorMessage}
+                    <InlineNotification
+                        kind="error"
+                        title="Error"
+                        subtitle={errorMessage}
+                        hideCloseButton
+                    />
                 {/if}
-            </div>
-            <form on:submit|preventDefault={sendMessage} class="mt-4">
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        <label for="user-input" class="is-sr-only">Type your message</label>
-                        <input id="user-input" class="input" type="text" bind:value={userInput} placeholder="Type your message..." />
+                <div class="chat-container">
+                    <div class="chat-history">
+                        {#each chatHistory as message}
+                            <div class={`chat-bubble ${message.role === 'user' ? 'user-bubble' : 'ai-bubble'}`}>
+                                {#if message.role === 'user'}
+                                    <p>{message.content}</p>
+                                {:else}
+                                    {@html formatMessage(message.content)}
+                                {/if}
+                            </div>
+                        {/each}
                     </div>
-                    <div class="control">
-                        <button type="submit" class="button is-primary" disabled={isLoading}>
-                            {isLoading ? 'Sending...' : 'Send'}
-                        </button>
-                    </div>
+
+                    {#if isLoading}
+                        <ProgressBar />
+                    {/if}
                 </div>
-            </form>
-        </div>
-    </div>
-</section>
+            </Column>
+        </Row>
+
+        <Row>
+            <Column>
+                <form on:submit|preventDefault={sendMessage}>
+                    <TextInput
+                        labelText="Type your message"
+                        placeholder="Type your message..."
+                        bind:value={userInput}
+                    />
+                    <Button type="submit" disabled={isLoading}>
+                        {isLoading ? 'Sending...' : 'Send'}
+                    </Button>
+                </form>
+            </Column>
+        </Row>
+    </Grid>
+</Content>
+
+<style>
+    :global(.chat-container) {
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-history {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .chat-bubble {
+        max-width: 70%;
+        padding: 10px 15px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+    }
+
+    .user-bubble {
+        align-self: flex-end;
+        background-color: #0f62fe;
+        color: white;
+    }
+
+    .ai-bubble {
+        align-self: flex-start;
+        background-color: #f4f4f4;
+        color: #161616;
+    }
+</style>
