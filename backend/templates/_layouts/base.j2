@@ -6,7 +6,9 @@
 {% endwith %}
 
 <body>
-  <div class="container">
+
+  <main class="container">
+    {% include "_layouts/_nav.j2" %}
     {% include "_layouts/crumb.j2" %}
     <div class="content" style="padding-top: 1.0em;">
       {% block content %}
@@ -19,11 +21,9 @@
       </section>
       {% endblock %}
     </div>
-  </div>
+  </main>
 
 </body>
-
 </html>
-
 <script src="https://unpkg.com/htmx.org@1.9.10"></script>
 

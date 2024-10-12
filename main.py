@@ -51,7 +51,8 @@ app.add_middleware(RequestLoggerMiddleware
 app.add_middleware(CrumbMiddleware)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=os.getenv('ALLOW_ORIGINS', '').split(','),
+    # allow_origins=os.getenv('ALLOW_ORIGINS', '').split(','),
+    allow_origins=["http://localhost:5173"],  # Add your frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

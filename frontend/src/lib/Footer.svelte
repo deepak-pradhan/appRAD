@@ -1,5 +1,7 @@
-<footer class="footer">
-  <div class="content has-text-centered">
+<script>
+	import { Content } from "carbon-components-svelte"
+</script>
+
+<Content class="footer">
     <p>© 2024 AppRAD. All rights reserved.</p>
-  </div>
-</footer>
+</Content>

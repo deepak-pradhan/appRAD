@@ -1,20 +1,41 @@
-<nav class="navbar" aria-label="main navigation">
-	<div id="navbarBasicExample" class="navbar-menu">
-		<div class="navbar-start">
-			<a class="navbar-item" href="/"> Home </a>
-			<a class="navbar-item" href="chat"> Chat </a>
-			<a class="navbar-item" href="dsl_chat"> DSL Chat </a>
-			<a class="navbar-item" href="vendors"> Vendors </a>
-			<a class="navbar-item" href="smart_vendors"> Smart Vendors </a>
-		</div>
+<script lang="ts">
+	import { page } from '$app/stores'
 
-		<div class="navbar-end">
-			<div class="navbar-item">
-				<div class="buttons">
-					<a href="/" class="button is-primary"> <strong>Sign up</strong> </a>
-					<a href="/" class="button is-light"> Log in </a>
-				</div>
-			</div>
-		</div>
-	</div>
-</nav>
+	export let navs = [
+		{ label: 'Home', href: '/' },
+		{ label: 'Chat', href: '/chat' },
+		{ label: 'DSL Chat', href: '/dsl_chat' },
+		{ label: 'Smart Vendors', href: '/smart_vendors' },
+		{ label: 'Vendors', href: '/vendors' }
+	]
+
+	import { Header, HeaderNav, HeaderNavMenu, HeaderNavItem } from 'carbon-components-svelte'
+</script>
+
+<Header
+	company="appRAD"
+	platformName=""
+	expandedByDefault={false}
+	style="background-color: white; color:gray"
+>
+	<HeaderNav>
+		{#each navs as nav}
+			<HeaderNavItem href={nav.href} class="navbar-item" text="nav.label">
+				<span class:active={$page.url.pathname === nav.href}>{nav.label}</span>
+			</HeaderNavItem>
+		{/each}
+		<HeaderNavMenu text="WIPs: Dropdowns">
+			<HeaderNavItem href="/blog" text="Blog" />
+			<HeaderNavItem href="/posts" text="Posts" />
+			<HeaderNavItem href="/setup" text="Setup" />
+			<HeaderNavItem href="/timeline" text="Timeline" />
+		</HeaderNavMenu>
+	</HeaderNav>
+</Header>
+
+<style>
+	:global(.active) {
+		font-weight: bold;
+		text-decoration: underline;
+	}
+</style>

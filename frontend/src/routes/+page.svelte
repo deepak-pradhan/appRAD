@@ -1,53 +1,57 @@
-<script>
-  import { onMount } from 'svelte';
+<script lang="ts">
+	import { Content, Grid, Row, Column, Tile } from 'carbon-components-svelte'
+	import Hero from '$root/routes/Hero.svelte'
 
-  let features = [
-    { icon: 'fas fa-bolt', title: 'Fast API', description: 'High-performance backend' },
-    { icon: 'fas fa-code', title: 'Svelte Frontend', description: 'Reactive UI with SvelteKit' },
-    { icon: 'fas fa-database', title: 'Database Integration', description: 'Seamless ORM with SQLModel' },
-    { icon: 'fas fa-shield-alt', title: 'RBAC', description: 'Role-Based Access Control' }
-  ];
+	export let data
 
-
-  onMount(() => {
-    // Any initialization logic can go here
-  });
+	let features = [
+		{ icon: 'fas fa-bolt', title: 'Fast API', description: 'High-performance backend' },
+		{ icon: 'fas fa-code', title: 'Svelte Frontend', description: 'Reactive UI with SvelteKit' },
+		{ icon: 'fas fa-database', title: 'Database', description: 'Seamless ORM with SQLModel' },
+		{
+			icon: 'fas fa-brain',
+			title: 'Interface LLMs',
+			description: 'AI capabilities with local LLMs & AIOS'
+		}
+	]
 </script>
 
-<main>
+<Content>
+	<Hero {data} />
 
-  <section class="hero is-primary is-bold is-fullheight-with-navbar">
-    <div class="hero-body">
-      <div class="container">
-        <h1
-				class="title is-1 mb-6">
-          Welcome to AppRAD
-        </h1>
-        <h2 class="subtitle is-3 mb-6">
-          Rapid Application Development Framework
-        </h2>        
-        <a href="/dashboard" class="button is-light is-large">Get Started</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <h2 class="title is-2 has-text-centered">Key Features</h2>
-      <div class="columns is-multiline">
-        {#each features as feature}
-          <div class="column is-3">
-            <div class="box has-text-centered">
-              <span class="icon is-large">
-                <i class="{feature.icon} fa-2x"></i>
-              </span>
-              <h3 class="title is-4">{feature.title}</h3>
-              <p>{feature.description}</p>
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
-  </section>
+	<Grid>
+		<h2>In Sandbox are:</h2>
   
-</main>
+		<Row>
+			{#each features.slice(0, 4) as feature}
+				<Column>
+					<Tile class="tile">
+						<div class="icon"><i class={feature.icon}></i></div>
+						<h3>{feature.title}</h3>
+						<p>{feature.description}</p>
+					</Tile>
+				</Column>
+			{/each}
+		</Row>
+
+	</Grid>
+</Content>
+
+<style>
+	:global(.tile) {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+    flex-direction: column;
+		transition: transform 0.3s ease;
+	}
+
+	:global(.tile:hover) {
+		transform: translateY(-5px);
+	}
+
+	.icon {
+		font-size: 2rem;
+	}
+
+</style>
