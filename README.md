@@ -60,3 +60,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
             </Column>
         </Row>
 ```
+
+## Code Generator: I got Qwang Nguyen & Entu Chu! 
+
+![alt text](image-2.png)

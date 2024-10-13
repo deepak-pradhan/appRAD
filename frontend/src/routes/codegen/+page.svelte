@@ -115,7 +115,7 @@
 				{/if}
 				<TextInput
 					labelText="Describe the code you want to generate"
-					placeholder="E.g., Generate a model class file for Person using SQLModel. Use the Base and Vendor models as examples. Include the following attributes: id, name, age, email, and created_at. Ensure it follows the same structure and conventions as the existing models."
+					placeholder="E.g., Using SQLModel generate a model class file for Person. Use the Base and Vendor models as examples. Attributes are: name, age, and email. Ensure it follows the structure and conventions."
 					bind:value={codePrompt}
 				/>
 				<Button on:click={generateCode} disabled={isLoading}>
