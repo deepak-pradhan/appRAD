@@ -1,40 +1,41 @@
 <script lang="ts">
     import { marked } from 'marked';
     import { Content, Grid, Row, Column, Select, SelectItem, Slider, TextInput, Button, ProgressBar, InlineNotification } from "carbon-components-svelte";
+    import { writable } from 'svelte/store';
     
     interface ChatMessage {
         role: 'user' | 'assistant';
         content: string;
     }
 
-    let chatHistory: ChatMessage[] = [];
-    let userInput = '';
-    let isLoading = false;
-    let selectedModel = 'llama3.1:8b';
-    let temperature = 0.7;
-    let maxTokens = 100;
-    let errorMessage = '';
+    let chatHistory = writable<ChatMessage[]>([]);
+    let userInput = writable('');
+    let isLoading = writable(false);
+    let selectedModel = writable('llama3.1:8b');
+    let temperature = writable(0.7);
+    let maxTokens = writable(100);
+    let errorMessage = writable('');
 
     const availableModels = ['llama3.1:8b', 'granite-code:8b', 'granite-code:20b', 'codegemma:7b-instruct-fp16', 'codellama:7b', 'codellama:13b'];
 
     async function sendMessage() {
-        if (!userInput.trim()) return;
+        if (!$userInput.trim()) return;
 
-        isLoading = true;
-        errorMessage = '';
-        chatHistory = [...chatHistory, { role: 'user', content: userInput }];
+        $isLoading = true;
+        $errorMessage = '';
+        $chatHistory = [...$chatHistory, { role: 'user', content: $userInput }];
 
-        const conversationHistory = chatHistory.map(msg => `${msg.role}: ${msg.content}`);
+        const conversationHistory = $chatHistory.map(msg => `${msg.role}: ${msg.content}`);
 
         try {
             const response = await fetch('http://localhost:8081/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
-                    model: selectedModel, 
-                    prompt: userInput,
-                    temperature: temperature,
-                    max_tokens: maxTokens,
+                    model: $selectedModel, 
+                    prompt: $userInput,
+                    temperature: $temperature,
+                    max_tokens: $maxTokens,
                     conversation_history: conversationHistory
                 })
             });
@@ -42,13 +43,13 @@
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            chatHistory = [...chatHistory, { role: 'assistant', content: data.response }];
+            $chatHistory = [...$chatHistory, { role: 'assistant', content: data.response }];
         } catch (error) {
             console.error('Error:', error);
-            errorMessage = 'An error occurred while fetching the response. Please try again.';
+            $errorMessage = 'An error occurred while fetching the response. Please try again.';
         } finally {
-            isLoading = false;
-            userInput = '';
+            $isLoading = false;
+            $userInput = '';
         }
     }
 
@@ -67,7 +68,7 @@
 
         <Row>
             <Column lg={16}>
-                <Select labelText="Select Model" bind:selected={selectedModel}>
+                <Select labelText="Select Model" bind:selected={$selectedModel}>
                     {#each availableModels as model}
                         <SelectItem value={model} text={model} />
                     {/each}
@@ -78,37 +79,37 @@
         <Row>
             <Column lg={8}>
                 <Slider 
-                    labelText={`Temperature: ${temperature.toFixed(2)}`}
+                    labelText={`Temperature: ${$temperature.toFixed(2)}`}
                     min={0}
                     max={1}
                     step={0.01}
-                    bind:value={temperature}
+                    bind:value={$temperature}
                 />
             </Column>
             <Column lg={8}>
                 <Slider 
-                    labelText={`Max Tokens: ${maxTokens}`}
+                    labelText={`Max Tokens: ${$maxTokens}`}
                     min={1}
                     max={500}
                     step={1}
-                    bind:value={maxTokens}
+                    bind:value={$maxTokens}
                 />
             </Column>
         </Row>
 
         <Row>
             <Column>
-                {#if errorMessage}
+                {#if $errorMessage}
                     <InlineNotification
                         kind="error"
                         title="Error"
-                        subtitle={errorMessage}
+                        subtitle={$errorMessage}
                         hideCloseButton
                     />
                 {/if}
                 <div class="chat-container">
                     <div class="chat-history">
-                        {#each chatHistory as message}
+                        {#each $chatHistory as message}
                             <div class={`chat-bubble ${message.role === 'user' ? 'user-bubble' : 'ai-bubble'}`}>
                                 {#if message.role === 'user'}
                                     <p>{message.content}</p>
@@ -119,7 +120,7 @@
                         {/each}
                     </div>
 
-                    {#if isLoading}
+                    {#if $isLoading}
                         <ProgressBar />
                     {/if}
                 </div>
@@ -132,10 +133,10 @@
                     <TextInput
                         labelText="Type your message"
                         placeholder="Type your message..."
-                        bind:value={userInput}
+                        bind:value={$userInput}
                     />
-                    <Button type="submit" disabled={isLoading}>
-                        {isLoading ? 'Sending...' : 'Send'}
+                    <Button type="submit" disabled={$isLoading}>
+                        {$isLoading ? 'Sending...' : 'Send'}
                     </Button>
                 </form>
             </Column>

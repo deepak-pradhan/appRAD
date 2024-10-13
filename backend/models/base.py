@@ -11,15 +11,15 @@ class CModel(ABC, SQLModel):
     name: str | None = None
     description: str | None = None
     
-    # Blabeables
+    # Blamables
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     # created_by: str | None = None
     # updated_by: str | None = None
 
     # Lifecycle
-    # start_date: int | None = None
-    # ended_date: int | None = None
+    # start_at: datetime | None = None
+    # ended_at: datetime | None = None
     # is_active: bool = True
     # is_deleted: bool = False
     # status: str = 'S00'
