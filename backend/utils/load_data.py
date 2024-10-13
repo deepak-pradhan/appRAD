@@ -1,7 +1,6 @@
 from backend.models.vendor import Vendor
 from backend.models.product import Product
 from backend.db.db_init import get_db
-from sqlmodel import Session
 from faker import Faker
 from backend.helpers import Address, Email, Personal
 from backend.helpers.product_generator import generate_multiple_products
@@ -15,7 +14,6 @@ print(fake.date_this_decade().strftime('%m-%d-%Y'))
 print(fake.date_this_year().strftime('%m-%d-%Y'))
 print(fake.date_this_month().strftime('%m-%d-%Y'))
 print(fake.time())
-
 """
 
 def load_data(num_vendors: int =15, num_products=50):
@@ -29,8 +27,9 @@ def load_data(num_vendors: int =15, num_products=50):
     for i  in range(1, num_vendors):
         vendor = Vendor(
             id = i,
-            name=fake.company(),
-            email=fake.company_email()
+            name=fake.name(),
+            # email=fake.company_email(),
+            email=email_gen.generate_email(fake.name()),
         )
         vendor.validate()
         vendors.append(vendor)
