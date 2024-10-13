@@ -71,6 +71,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 @TODO: Housekeeping  
 , model hM bases.CModel > (RModel, LModel, OModel)
 
+```yaml
 ├── 📑 README.md
 ├── 📑 main.py
 ├── 🗂️  backend
@@ -148,3 +149,4 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
     │   └── 🗂️  utils
     │       └── 📑 logger.ts
     └── 🗂️  static
+```    
