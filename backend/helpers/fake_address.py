@@ -21,7 +21,7 @@ class Address:
     def validate(self) -> None:
         super().validate()
         if self.state not in self.country:
-            raise ValueError(f"Un-synthetic state {self.state} in {self.country}")
+            raise ValueError(f"!Synthetic: state {self.state} in {self.country}")
         
     def generate(self):
         return self
