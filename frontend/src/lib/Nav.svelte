@@ -4,7 +4,7 @@
 	export let navs = [
 		{ label: 'Home', href: '/' },
 		{ label: 'Chat', href: '/chat' },
-		{ label: 'DSL Chat', href: '/dsl_chat' },
+		{ label: 'Code Gen', href: '/codegen' },
 		{ label: 'Smart Vendors', href: '/smart_vendors' },
 		{ label: 'Vendors', href: '/vendors' }
 	]
