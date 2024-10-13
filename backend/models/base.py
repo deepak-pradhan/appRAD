@@ -22,6 +22,7 @@ class CModel(ABC, SQLModel):
     # ended_at: datetime | None = None
     # is_active: bool = True
     # is_deleted: bool = False
+    # purge_on: datetime | None = None
     # status: str = 'S00'
     # version: int = 1
 
