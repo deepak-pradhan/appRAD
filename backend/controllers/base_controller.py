@@ -19,23 +19,19 @@ from backend.utils.sorting import apply_sorting
 # from fastui.events import GoToEvent, BackEvent
 
 class BaseController:
-    """
-    Base controller class providing common functionality for other controllers.
-    """
     _current_dir: Path = Path(__file__).parent.parent.parent
-    _templates_dir: str = str(_current_dir.joinpath("backend", "templates"))
+    _templates_dir: str = str(_current_dir.joinpath("backend", "templates")) # default templates directory
 
     def __init__(self, model: Type[CModel], resource_name: str = None, templates_dir: str = None):
         self.model = model
-        self.templates_dir = templates_dir or self._templates_dir  # Use the provided templates_dir or the default
+        self.templates_dir = templates_dir or self._templates_dir  # Use the default templates_dir or override
 
         if resource_name is None:
             self.resource_name = self.model.__name__.lower() + 's'
         else:
             self.resource_name = resource_name
 
-        self.templates = Jinja2Templates(directory=str(self.templates_dir))
-        
+        self.templates = Jinja2Templates(directory=str(self.templates_dir))        
         self.router = APIRouter()
 
     def separate_headers_and_data(self, models):
@@ -46,7 +42,6 @@ class BaseController:
 
         # Get the column headers
         headers = [field.name for field in model_class.__table__.columns]
-        
         
         # Extract data rows
         data_rows = []
@@ -61,6 +56,7 @@ class BaseController:
         ''' Create a new item '''
         data = await request.json()
         model = self.model.from_dict(data)
+        model.validate() # add validation, untested! 
         db.add(model)
         db.commit()
         db.refresh(model)
@@ -114,21 +110,22 @@ class BaseController:
         # if not models:
         #     self.logger.info(f"Info: No items in list method")
         #     return JSONResponse(status_code=404, content={"detail": "Item not found"})
-        headers, data = self.separate_headers_and_data(models)
-        print("\nHeaders:", headers)
-        print("\nData rows:", data)
-
+       
         total = db.exec(select(func.count(self.model.id))).first()
-
         return models
-        return self.templates.TemplateResponse(
-                "vendors/list.j2", {
-                        "request": request
-                        , "models": models
-                        , "pagination": pagination
-                        , "total": total
-                    }   
-            )
+    
+        # @TODO: backend model admin         
+        # headers, data = self.separate_headers_and_data(models)
+        # return self.templates.TemplateResponse(
+        #         "vendors/list.j2", {
+        #                 "request": request
+        #                 , "models": models
+        #                 # , "headers": headers
+        #                 # , "data": data
+        #                 , "pagination": pagination
+        #                 , "total": total
+        #             }   
+        #     )
         
     # Update
     async def update(self, request: Request, id: int, db: Session = Depends(get_db)):
@@ -137,7 +134,8 @@ class BaseController:
         if model is None:
             return JSONResponse(status_code=404, content={"detail": "Item not found"})
         
-    # Delete    
+    # Delete v1    
+
     async def delete(self, request: Request, id: int, db: Session = Depends(get_db)):
         model = db.get(self.model, id)
         if model is None:

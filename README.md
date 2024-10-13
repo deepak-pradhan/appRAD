@@ -65,88 +65,33 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 
 ![alt text](image-2.png)
 
-### O/P after refactoring: 
-
-**Inital Project Structure**
-@TODO: Housekeeping  
-, model hM bases.CModel > (RModel, LModel, OModel)
+**Inital Structure**
 
 ```yaml
 ├── 📑 README.md
 ├── 📑 main.py
 ├── 🗂️  backend
 │   ├── 🗂️  controllers
-│   │   ├── 📑 base_controller.py
-│   │   ├── 📑 ollama_controller.py
-│   │   └── 📑 vendors_controller.py
 │   ├── 🗂️  db
-│   │   ├── 📑 databases.py
-│   │   └── 📑 db_init.py
 │   ├── 🗂️  helpers
-│   │   ├── 📑 fake_address.py
-│   │   ├── 📑 fake_email.py
-│   │   ├── 📑 fake_personal.py
-│   │   ├── 📑 fake_thing.py
-│   │   └── 📑 product_generator.py
 │   ├── 🗂️  middlewares
-│   │   ├── 📑 crumb.py
-│   │   └── 📑 request_logger.py
 │   ├── 🗂️  models
-│   │   ├── 📑 base.py
-│   │   ├── 📑 l_model.py
-│   │   ├── 📑 thing.py
-│   │   ├── 📑 vendor.py
+│   │   └── 🗂️  bases
 │   │   └── 🗂️  enums
-│   │       └── 📑 country_codes.py
 │   ├── 🗂️  static
 │   │   ├── 🗂️  css
 │   │   └── 🗂️  js
 │   ├── 🗂️  templates
-│   │   ├── 📑 index.j2
 │   │   ├── 🗂️  _layouts
-│   │   │   ├── 📑 base.j2
-│   │   │   ├── 📑 crumb.j2
-│   │   │   └── 📑 head.j2
-│   │   │   ├── 📑 nav.j2
 │   │   ├── 🗂️  _macros
-│   │   └── 🗂️  vendors
-│   │       └── 📑 list.j2
 │   └── 🗂️  utils
-│       ├── 📑 caching.py
-│       ├── 📑 exceptions.py
-│       ├── 📑 filtering.py
-│       ├── 📑 load_data.py
-│       ├── 📑 logging.py
-│       ├── 📑 pagination.py
-│       ├── 📑 permissions.py
-│       ├── 📑 settings.py
-│       ├── 📑 sorting.py
 └── 🗂️  frontend
     ├── 🗂️  src
-    │   ├── 📑 app.d.ts
-    │   ├── 📑 hooks.server.ts
     │   ├── 🗂️  lib
-    │   │   ├── 📑 Footer.svelte
-    │   │   ├── 📑 Nav.svelte
-    │   │   ├── 🗂️  smart_vendors
-    │   │   │   └── 📑 List.svelte
     │   ├── 🗂️  routes
-    │   │   ├── 📑 +error.svelte
-    │   │   ├── 📑 +layout.svelte
-    │   │   ├── 📑 +page.server.js
-    │   │   ├── 📑 +page.svelte
-    │   │   ├── 📑 Hero.svelte
     │   │   ├── 🗂️  chat
-    │   │   │   └── 📑 +page.svelte
     │   │   ├── 🗂️  codegen
-    │   │   │   └── 📑 +page.svelte
     │   │   ├── 🗂️  get-started
-    │   │   │   └── 📑 +page.svelte
-    │   │   ├── 🗂️  smart_vendors
-    │   │   │   ├── 📑 +page.svelte
-    │   │   └── 🗂️  vendors
-    │   │       └── 📑 +page.svelte
     │   └── 🗂️  utils
-    │       └── 📑 logger.ts
     └── 🗂️  static
 ```    
