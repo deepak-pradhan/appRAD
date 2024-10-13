@@ -1,11 +1,11 @@
 from faker import Faker
 fake = Faker()
 
-class fakeThing:
+class Thing:
 
     data = []
     def get_data(rec_type = 'Thing'
-                 , name = 'Default Thing'
+                 , name = 'Thing'
             ):   
              
         data = {

@@ -17,6 +17,11 @@ class Address:
         
     def generate_address(self):
         self.full_address= f"{self.building} {self.street_name}, {self.city}, {self.state} - {self.postal}"
+
+    def validate(self) -> None:
+        super().validate()
+        if self.state not in self.country:
+            raise ValueError(f"Un-synthetic state {self.state} in {self.country}")
         
     def generate(self):
         return self

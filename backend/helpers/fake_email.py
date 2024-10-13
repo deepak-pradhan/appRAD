@@ -39,4 +39,4 @@ class Email:
         return self._syntheic_email(first_name, last_name, company_domain, company)
 
     def generate_personal_email(self, first_name, last_name):
-        return self._syntheic_email(first_name, last_name, fake.free_email_domain)
+        return self._syntheic_email(first_name, last_name, fake.free_email_domain)   
