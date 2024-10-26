@@ -8,7 +8,7 @@ from fastapi.templating import Jinja2Templates
 from backend.db.databases import get_json
 from backend.models.bases.bmodel import CModel
 
-class BController:
+class CController:
     _current_dir: Path = Path(__file__).parent.parent.parent
     _templates_dir: str = str(_current_dir.joinpath("backend", "templates")) # default templates directory
 
