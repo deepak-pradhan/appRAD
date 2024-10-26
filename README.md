@@ -66,26 +66,24 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 ![alt text](image-2.png)
 
 **Inital Structure**
+- 2024.10.26: @WIP stucture: skeleton, concept only.   
 
 ```yaml
 ├── 📑 README.md
 ├── 📑 main.py
 ├── 🗂️  backend
 │   ├── 🗂️  controllers
+│   │   └── 🗂️  bases
 │   ├── 🗂️  db
+│   │   └── 🗂️  storage
+│   │   └── 🗂️  tools
 │   ├── 🗂️  helpers
 │   ├── 🗂️  middlewares
 │   ├── 🗂️  models
 │   │   └── 🗂️  bases
 │   │   └── 🗂️  enums
-│   ├── 🗂️  static
-│   │   ├── 🗂️  css
-│   │   └── 🗂️  js
-│   ├── 🗂️  templates
-│   │   ├── 🗂️  _layouts
-│   │   ├── 🗂️  _macros
 │   └── 🗂️  utils
-└── 🗂️  frontend
+└── 🗂️  frontend (TBD)
     ├── 🗂️  src
     │   ├── 🗂️  lib
     │   ├── 🗂️  routes
