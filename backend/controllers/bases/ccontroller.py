@@ -17,10 +17,9 @@ class CController:
         self.templates_dir = templates_dir # No override for in-processs context templates
 
         if resource_name is None:
-            self.resource_name = self.model.__name__.lower() + 's'
-        else:
-            self.resource_name = resource_name
+            resource_name = self.model.__name__.lower() + 's'
 
+        self.resource_name = resource_name
         self.templates = Jinja2Templates(directory=str(self.templates_dir))        
         self.router = APIRouter()
 
