@@ -77,7 +77,8 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 │   ├── 🗂️  db
 │   │   └── 🗂️  stores
     │   │   ├── 📑 in-process.db
-    │   │   ├── 🗃️ context
+    │   │   ├── 📑 in-process.json
+    │   │   ├── 🗃️ contexts
 │   │   └── 🗂️  tools
 │   ├── 🗂️  helpers
 │   ├── 🗂️  middlewares
