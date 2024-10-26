@@ -4,34 +4,23 @@ from pathlib import Path
 
 from fastapi import Depends, APIRouter, Request
 from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.templating import Jinja2Templates
-from sqlmodel import Session, func, select
+from sqlmodel import Session, select
 
 from backend.db.databases import get_db
-from backend.models.base import CModel
+from backend.models.bases.bmodel import BModel
 from backend.utils.pagination import Pagination
 from backend.utils.filtering import apply_filters
 from backend.utils.sorting import apply_sorting
 
-# FS: Keep this import for FastUI
-# from fastui import FastUI, AnyComponent, prebuilt_html, components as c
-# from fastui.components.display import DisplayMode, DisplayLookup
-# from fastui.events import GoToEvent, BackEvent
-
-class BaseController:
-    _current_dir: Path = Path(__file__).parent.parent.parent
-    _templates_dir: str = str(_current_dir.joinpath("backend", "templates")) # default templates directory
-
-    def __init__(self, model: Type[CModel], resource_name: str = None, templates_dir: str = None):
+class BController:
+    def __init__(self, model: Type[BModel], resource_name: str = None):
         self.model = model
-        self.templates_dir = templates_dir or self._templates_dir  # Use the default templates_dir or override
 
         if resource_name is None:
             self.resource_name = self.model.__name__.lower() + 's'
         else:
             self.resource_name = resource_name
 
-        self.templates = Jinja2Templates(directory=str(self.templates_dir))        
         self.router = APIRouter()
 
     def separate_headers_and_data(self, models):
@@ -56,7 +45,7 @@ class BaseController:
         ''' Create a new item '''
         data = await request.json()
         model = self.model.from_dict(data)
-        model.validate() # add validation, untested! 
+        # model.validate() # add validation, untested! 
         db.add(model)
         db.commit()
         db.refresh(model)
@@ -106,26 +95,8 @@ class BaseController:
             .offset(offset)
             .limit(pagination.page_size)
         ).all()
-
-        # if not models:
-        #     self.logger.info(f"Info: No items in list method")
-        #     return JSONResponse(status_code=404, content={"detail": "Item not found"})
-       
-        total = db.exec(select(func.count(self.model.id))).first()
+      
         return models
-    
-        # @TODO: backend model admin         
-        # headers, data = self.separate_headers_and_data(models)
-        # return self.templates.TemplateResponse(
-        #         "vendors/list.j2", {
-        #                 "request": request
-        #                 , "models": models
-        #                 # , "headers": headers
-        #                 # , "data": data
-        #                 , "pagination": pagination
-        #                 , "total": total
-        #             }   
-        #     )
         
     # Update
     async def update(self, request: Request, id: int, db: Session = Depends(get_db)):

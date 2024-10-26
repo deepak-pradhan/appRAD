@@ -1,0 +1,29 @@
+{
+    "fields": {
+        "id": {
+            "type": "INTEGER",
+            "default": null,
+            "primary_key": true,
+            "unique": false,
+            "index": false,
+            "foreign_keys": []
+        },
+        "title": {
+            "type": "VARCHAR",
+            "default": null,
+            "primary_key": false,
+            "unique": false,
+            "index": false,
+            "foreign_keys": []
+        },
+        "author_id": {
+            "type": "INTEGER",
+            "default": null,
+            "primary_key": false,
+            "unique": false,
+            "index": false,
+            "foreign_keys": []
+        }
+    },
+    "relationships": {}
+}

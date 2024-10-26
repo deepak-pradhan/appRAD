@@ -10,4 +10,7 @@ def get_db():
     with Session(engine) as session:
         yield session
 
+def get_json():
+    pass
+
 __all__ = ['get_db', 'create_db_and_tables']       
