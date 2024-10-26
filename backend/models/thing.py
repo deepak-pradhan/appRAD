@@ -1,8 +1,12 @@
 from sqlmodel import Field
-from backend.models.base import CModel
+from backend.models.bases.bmodel import BModel
 from abc import ABC, abstractmethod
 
-class Thing(ABC, CModel, table=True):
+class Thing(BModel, table=False):
+    '''
+    Products & Servces consume Materials
+    Materials has origin(Plants, Animals, Humans, Natural)
+    '''
     __tablename__ = "thing"
     alternate_name : str = Field(default=None) 
     additional_types: str = Field(default=None)
@@ -14,9 +18,9 @@ class Thing(ABC, CModel, table=True):
     knows_About : str
     mentions: str
     produces: str
+    services: str  
     replaces: str
     replacer: str
-    services: str  
 
     @abstractmethod
     def validate(self) -> None:

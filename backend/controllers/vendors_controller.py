@@ -7,9 +7,9 @@ from sqlmodel import Session
 
 from backend.db.databases import get_db
 from backend.models.vendor import Vendor
-from backend.controllers.base_controller import BaseController
+from backend.controllers.bases.bcontroller import BController
 
-class VendorsController(BaseController):
+class VendorsController(BController):
     def __init__(self):
         super().__init__(Vendor, "vendors")
         self.register_additional_routes()
