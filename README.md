@@ -75,14 +75,16 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 │   ├── 🗂️  controllers
 │   │   └── 🗂️  bases
 │   ├── 🗂️  db
-│   │   └── 🗂️  storage
+│   │   └── 🗂️  stores
+    │   │   ├── 📑 in-process.db
+    │   │   ├── 🗃️ context
 │   │   └── 🗂️  tools
 │   ├── 🗂️  helpers
 │   ├── 🗂️  middlewares
 │   ├── 🗂️  models
 │   │   └── 🗂️  bases
-│   │   └── 🗂️  enums
-│   └── 🗂️  utils
+│   │   └── 🗃️  enums
+│   └── 🧰  utils
 └── 🗂️  frontend (TBD)
     ├── 🗂️  src
     │   ├── 🗂️  lib
