@@ -2,7 +2,7 @@ from typing import List
 from sqlmodel import Field, Relationship
 from pydantic import EmailStr
 from sqlalchemy.orm import declared_attr
-from sbox1.backend.models.bases.bmodel import BModel
+from backend.models.bases.bmodel import BModel
 
 class Vendor(BModel, table=True):
 
@@ -22,4 +22,3 @@ class Vendor(BModel, table=True):
         if not self.email:
             raise ValueError("Email cannot be empty")
         
-from sbox1.backend.models.product import Product  # At the bottom of vendor.py

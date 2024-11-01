@@ -1,6 +1,6 @@
 from sqlmodel import Field, Relationship
 from decimal import Decimal
-from sbox1.backend.models.bases.bmodel import BModel
+from backend.models.bases.bmodel import BModel
 # from backend.models.vendor import Vendor
 
 class Product(BModel, table=True):

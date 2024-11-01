@@ -1,0 +1,6 @@
+{% macro link(label, route, disabled='') %}
+    <li>
+        <a class="nav-link {{disabled}}" href="{{route}}">{{label}}</a>
+    </li>
+{% endmacro %}
+
