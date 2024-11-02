@@ -1,6 +1,6 @@
 
 <script lang="ts">
-  import { nodeTypes } from './nodeTypes';
+  import { nodeTypes } from '$lib/components/flow-builder/nodeTypes';
   import { createEventDispatcher } from 'svelte';
 
   export let id: string;

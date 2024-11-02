@@ -2,3 +2,7 @@
 __pycache__/
 *.pyc
 node_modules/
+backend/examples/file_management/data/sample_binary_100_bytes.bin
+/backend/examples/file_management/data
+/backend/examples/file_management/external
+/backend/examples/file_management/storage

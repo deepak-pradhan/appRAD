@@ -7,6 +7,7 @@
       <a href="/chat">AI Chat</a>
       <a href="/codegen">Code Generator</a>
       <a href="/flow">Flow Builder</a>
+      <a href="/agent-flow">Agent Flow</a>
     </div>
   </div>
 </nav>
