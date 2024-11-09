@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folder Structure Visualization</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js" integrity="sha512-vc58qvvBdrDR4etbxMdlTt4GBQk1qjvyORR2nrsPsFPyrs+/u5c3+1Ct6upOgdZoIl7eq6k3a1UPDSNAQi/32A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre-d3/0.6.4/dagre-d3.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    /* Styling for nodes and edges */
+    .node rect {
+      fill: #68a0cf;
+      stroke: #1c3f5d;
+      stroke-width: 2px;
+    }
+    .edgePath path {
+      stroke: #1c3f5d;
+      stroke-width: 1.5px;
+    }
+    .node text {
+      font-weight: bold;
+      fill: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <h2>Folder Structure and Chat State Visualization</h2>
+  <div id="graph-container">
+    <svg width="1000" height="800">
+      <g></g>
+    </svg>
+  </div>
+
+  <script>
+    // Simulated JSON data for folder structure
+    const folderData = [
+      { id: "root", label: "backend.data.tinydb" },
+      { id: "folder1", label: "Node1", parent: "root" },
+      { id: "folder2", label: "Node2", parent: "root" },
+      { id: "file1", label: "Chat State 1", parent: "folder1", state: "Started" },
+      { id: "file2", label: "Chat State 2", parent: "folder1", state: "In Progress" },
+      { id: "file3", label: "Chat State 3", parent: "folder2", state: "Completed" }
+    ];
+
+    // Initialize dagre-d3 graph with an empty graph object
+    const g = new dagreD3.graphlib.Graph({ multigraph: true }).setGraph({});
+    g.setDefaultEdgeLabel(() => ({})); // Ensures edges have default label
+
+    // Add nodes and edges based on folderData
+    folderData.forEach((item) => {
+      const label = item.state ? `${item.label}\n(${item.state})` : item.label;
+      g.setNode(item.id, { label: label, width: 150, height: 50 });
+      if (item.parent) {
+        g.setEdge(item.parent, item.id);
+      }
+    });
+
+    // Select the SVG and set up the rendering
+    const svg = d3.select("svg"),
+          inner = svg.select("g");
+
+    // Create renderer and render the graph
+    const render = new dagreD3.render();
+    render(inner, g);
+
+    // Adjust SVG dimensions to fit content
+    const graphWidth = g.graph().width + 40,
+          graphHeight = g.graph().height + 40;
+    svg.attr("width", graphWidth).attr("height", graphHeight);
+  </script>
+</body>
+</html>

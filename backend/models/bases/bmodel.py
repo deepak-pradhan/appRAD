@@ -1,12 +1,13 @@
 """
-`BModel` an abstract base class that inherits from both `ABC` (Abstract Base Class) and `SQLModel`. 
+`BModel` is an abstract base class.
+It inherits from both `ABC` (Abstract Base Class) and `SQLModel`. 
 
 It has:
     1. Pre-defined fields of Thing: 
        `id`, `type`, `name`, `description`
 
     2. Blammable fields: 
-       `created_at`, `updated_at`
+       `created_at`, `updated_at`, 'created_by`, `updated_by`
 
     3. Basis State: 
        `is_active`

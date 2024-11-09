@@ -1,0 +1,24 @@
+{% macro link(label, route, disabled='') %}
+    <li>
+        <a class="nav-link {{disabled}}" href="{{route}}">{{label}}</a>
+    </li>
+{% endmacro %}
+
+{% set navigation = [
+    ('Home', '/') 
+    , ('Vendors', '/vendors')
+    , ('Ollama-Chat', '/chat')
+    , ('Ollama-Code', '/generate_code')
+] %}
+
+<nav>
+    <ul>
+        <li> <a href="/">Home</a>  </li>
+    </ul>   
+    <ul>
+        {{ link('Books', '/books') }}
+        {{ link('Vendors', '/vendors') }}
+        {{ link('Chat', '/chat') }}
+        {{ link('GenCode', '/generate_code') }}
+    </ul>
+</nav>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversation Flow Mind Map</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsmind/style/jsmind.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsmind/js/jsmind.js"></script>
+</head>
+<body>
+    <h3>Conversation Map</h3>
+    <button onclick="loadMap()">Load Map</button>
+    <div id="mindmap" style="width:100%;height:500px;border:1px solid #ccc;"></div>
+    
+    <script>
+        function loadMap() {
+            // Hardcoded example data for jsMind
+            const data = [
+                { "id": "root", "isroot": true, "topic": "Conversation" },
+                { "id": "s1", "parentid": "root", "topic": "What is the climate like?", "direction": "right" },
+                { "id": "s1_response", "parentid": "s1", "topic": "Tropical climate with rainfall" },
+                { "id": "s2", "parentid": "root", "topic": "How does the weather affect?", "direction": "right" },
+                { "id": "s2_response", "parentid": "s2", "topic": "Affects health" },
+                { "id": "s3", "parentid": "root", "topic": "Best crops for climate?", "direction": "right" }
+            ];
+
+            const options = {
+                container: 'mindmap',
+                editable: true,
+                theme: 'primary'
+            };
+
+            const mindMap = {
+                "meta": { "name": "conversation_flow", "author": "your_app" },
+                "format": "node_array",
+                "data": data
+            };
+
+            const jm = new jsMind(options);
+            jm.show(mindMap);
+            console.log("Mind map rendered with static data.");
+        }
+    </script>
+</body>
+</html>

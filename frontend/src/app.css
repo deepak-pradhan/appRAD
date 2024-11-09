@@ -1,0 +1,17 @@
+/* src/app.css */
+:root {
+    --primary: #00ff88;
+    --background: #0a0a0a;
+    --text: #ffffff;
+  }
+  
+  body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+  
+  * {
+    box-sizing: border-box;
+  }

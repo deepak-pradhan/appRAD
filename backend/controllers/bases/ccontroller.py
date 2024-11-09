@@ -32,12 +32,28 @@ class CController:
     # Read
     async def read(self, request: Request, id: int, db: Session = Depends(get_json)):
         pass
-    # find_by_id    
-    # find_by_aid
-    # find_by_cid
-
+    # find_by_id (tid)    
+    # find_by_aid (tid, aid)
+    # find_by_aids (tid)
+    # find_by_cid (tid, aid, cid)
+    # find_by_cids (tid, aid)
+    # find_is_keeps(x=True, y=False)  
+    # find_is_keeps(x=False, y=True)  
+    # find_is_keeps(x=True, y=True)  
         
-    # Update
+    ## Update
+    # self.is (type, name, description) # define things
+    # self.state (tid, aid, cid, state)
+    # self.is_keep_x (tid, aid, cid, is_keep)
+    # self.is_keep_y (tid, aid, cid, is_keep)
+    # self.is_final (tid, aid, cid, is_keep)
+
+    # h1 & hM
+    # self.action (tid, aid, cid, has_one = {tid, aid})
+    # self.actions (tid, aid, cid, has_many = [[tid, aid, cid],...])    
+    # self.action_context (tid, aid, cid, is_keep)
+    # self.action_contexts (tid, aid, cid, is_keep)
+
         
     # Delete    
     

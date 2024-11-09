@@ -4,7 +4,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 
 ## Landing Page
 
-![alt text](image.png)
+![alt text](_docs/image.png)
 
 **The Hello World!, the Svelte way**  
 ```html
@@ -26,7 +26,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 ```                
 
 ## Chat
-![alt text](image-1.png)
+![alt text](_docs/image-1.png)
 
 **Less Clutter**
 ```html
@@ -63,7 +63,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 
 ## Code Generator: I got Huang Nguyen & Entu Chu! 
 
-![alt text](image-2.png)
+![alt text](_docs/image-2.png)
 
 **Inital Structure**
 - 2024.10.26: @WIP stucture: skeleton, concept only, untested.   
@@ -78,6 +78,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 │   │   └── 🗂️  stores
     │   │   ├── 📑 in-process.db
     │   │   ├── 📑 in-process.json
+    │   │   ├── 📑 in-process.duck
     │   │   ├── 🗃️ contexts
 │   │   └── 🗂️  tools
 │   ├── 🗂️  helpers
@@ -96,3 +97,7 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
     │   └── 🗂️  utils
     └── 🗂️  static
 ```    
+
+
+
+![alt text](_docs/image-3.png)
