@@ -1,0 +1,65 @@
+Name, Writer, Time Elapsed
+CD_1.1GB, buffered_io_writer, 15.088385s
+CD_1.1GB, low_level_writer, 32.372274s
+CD_1.1GB, standard_csv_writer, 40.767912s
+CD_1.1GB, chunked_writer, 41.976185s
+DVD_7.2GB, buffered_io_writer, 1m 40.179794s
+DVD_7.2GB, low_level_writer, 3m 22.277630s
+DVD_7.2GB, chunked_writer, 4m 15.358230s
+DVD_7.2GB, standard_csv_writer, 4m 30.133069s
+FLOPPY, buffered_io_writer, 0.075432s
+FLOPPY, standard_csv_writer, 0.126189s
+FLOPPY, low_level_writer, 0.135424s
+FLOPPY, chunked_writer, 0.166427s
+MINI_128MB, buffered_io_writer, 3.189439s
+MINI_128MB, low_level_writer, 6.062204s
+MINI_128MB, chunked_writer, 7.553938s
+MINI_128MB, standard_csv_writer, 7.685824s
+MINI_16MB, buffered_io_writer, 0.584236s
+MINI_16MB, standard_csv_writer, 0.974136s
+MINI_16MB, low_level_writer, 1.200912s
+MINI_16MB, chunked_writer, 1.479989s
+MINI_32MB, buffered_io_writer, 1.099833s
+MINI_32MB, standard_csv_writer, 1.987327s
+MINI_32MB, low_level_writer, 2.216952s
+MINI_32MB, chunked_writer, 2.688950s
+MINI_512MB, buffered_io_writer, 12.546000s
+MINI_512MB, low_level_writer, 25.795963s
+MINI_512MB, standard_csv_writer, 28.644302s
+MINI_512MB, chunked_writer, 29.293990s
+MINI_64MB, buffered_io_writer, 2.006438s
+MINI_64MB, low_level_writer, 3.441817s
+MINI_64MB, standard_csv_writer, 3.613559s
+MINI_64MB, chunked_writer, 4.186385s
+TINY_128KB, buffered_io_writer, 0.009180s
+TINY_128KB, standard_csv_writer, 0.011407s
+TINY_128KB, low_level_writer, 0.018105s
+TINY_128KB, chunked_writer, 0.022471s
+TINY_16KB, buffered_io_writer, 0.001548s
+TINY_16KB, low_level_writer, 0.002688s
+TINY_16KB, standard_csv_writer, 0.003018s
+TINY_16KB, chunked_writer, 0.003451s
+TINY_1KB, standard_csv_writer, 0.000375s
+TINY_1KB, buffered_io_writer, 0.000398s
+TINY_1KB, low_level_writer, 0.000447s
+TINY_1KB, chunked_writer, 0.000587s
+TINY_32KB, buffered_io_writer, 0.002589s
+TINY_32KB, standard_csv_writer, 0.004618s
+TINY_32KB, low_level_writer, 0.005082s
+TINY_32KB, chunked_writer, 0.006363s
+TINY_4KB, buffered_io_writer, 0.000603s
+TINY_4KB, low_level_writer, 0.000961s
+TINY_4KB, standard_csv_writer, 0.001161s
+TINY_4KB, chunked_writer, 0.001191s
+TINY_512KB, buffered_io_writer, 0.030868s
+TINY_512KB, standard_csv_writer, 0.047393s
+TINY_512KB, low_level_writer, 0.060733s
+TINY_512KB, chunked_writer, 0.071978s
+TINY_64KB, buffered_io_writer, 0.005222s
+TINY_64KB, standard_csv_writer, 0.007244s
+TINY_64KB, low_level_writer, 0.009666s
+TINY_64KB, chunked_writer, 0.012073s
+TINY_8KB, buffered_io_writer, 0.000914s
+TINY_8KB, low_level_writer, 0.001533s
+TINY_8KB, chunked_writer, 0.001995s
+TINY_8KB, standard_csv_writer, 0.002255s
