@@ -1,7 +1,6 @@
 import os
 import logging
 from pathlib import Path
-from typing import List
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request, Depends
 from fastapi.responses import JSONResponse
@@ -14,10 +13,8 @@ from backend.db.db_init import init_db, get_db
 from backend.middlewares.request_logger import RequestLoggerMiddleware
 from backend.middlewares.crumb import CrumbMiddleware
 from backend.models.vendor import Vendor
-# from backend.controllers.vendors_controller import router as vendors_routes
 from backend.controllers.ollama_controller import router as ollama_routes
-from backend.controllers.file_controller import router as file_routes
-from backend.models.l_model import LModel
+from backend.controllers.model_file_controller import router as model_file_routes
 from backend.controllers.llama_controller import router as llama_router
 
 # Pre-Prep
@@ -28,7 +25,6 @@ templates_dir : str = f"{current_dir}/backend/templates"
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
 
 # Start
 app = FastAPI(
@@ -47,11 +43,11 @@ async def global_exception_handler(request: Request, exc: Exception):
         content={"message": "An unexpected error occurred. Please try again later."}
     )
 
-# Prep
+# Load middlewares
 app.add_middleware(RequestLoggerMiddleware
     , is_request_logging_on=True
 )
-app.add_middleware(CrumbMiddleware)
+app.add_middleware(CrumbMiddleware) # Pages in pages/*
 app.add_middleware(
     CORSMiddleware,
     # allow_origins=os.getenv('ALLOW_ORIGINS', '').split(','),
@@ -60,38 +56,23 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+# mount View for Pages (HTMX + Jinja + MindJS + Alpine.js)
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 templates = Jinja2Templates(directory=templates_dir)
 app.add_exception_handler(Exception, global_exception_handler)
 
-
-# app.include_router(vendors_routes, tags=["vendors"])
 app.include_router(ollama_routes, tags=["ollama"])
-app.include_router(file_routes, tags=["models"])
-# app.include_router(lmodel_routes, prefix="/api", tags=["lmodel"])
-# app.add_api_route("/chat", OllamaController.chat_with_ollama, methods=["POST"])
+app.include_router(model_file_routes, tags=["models"])
 app.include_router(llama_router, prefix="/llama", tags=["llama"])
 
-
-# End points
+# @TODO: End points for Pages
 @app.get("/")
 def read_root(request: Request):    
     return templates.TemplateResponse("index.j2", {
         'request': request
         , 'name' : 'Joe'
     })
-
-
-@app.get("/vendors")
-async def list_vendors( request: Request, db: Session = Depends(get_db)) :    
-    models= db.exec(select(Vendor)).all()
-    if request.headers.get("accept") == "text/html":
-        return templates.TemplateResponse("vendors/list.j2", {
-                "request": request, "models": models
-        })
-    
-    return models
-    
+  
     
 if __name__ == "__main__":
     import uvicorn 
