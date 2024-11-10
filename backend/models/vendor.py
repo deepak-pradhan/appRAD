@@ -22,3 +22,4 @@ class Vendor(BModel, table=True):
         if not self.email:
             raise ValueError("Email cannot be empty")
         
+from backend.models.product import Product

@@ -3,7 +3,7 @@ from decimal import Decimal
 from backend.models.bases.bmodel import BModel
 # from backend.models.vendor import Vendor
 
-class Product(BModel, table=True):
+class Product(BModel, extend_existing=True):
     __tablename__ = "product"
     type: str = "product"
     name: str = Field(index=True)
@@ -21,4 +21,4 @@ class Product(BModel, table=True):
         if not self.sku:
             raise ValueError("SKU is required")
 
-from sbox1.backend.models.vendor import Vendor  # At the bottom of product.py
+from backend.models.vendor import Vendor  # Leave at the bottom of product.py

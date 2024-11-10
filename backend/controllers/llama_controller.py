@@ -1,3 +1,4 @@
+import json
 from typing import Any, Dict, List
 from fastapi import APIRouter
 from backend.controllers.bases.base_llm_controller import BaseLLMController
@@ -5,8 +6,6 @@ from backend.models.bases.lmodel import LModel, Function, FunctionCall
 from backend.functions.currency_conversion import convert_currency
 from backend.functions.language_translation import translate_text
 from backend.functions.data_analysis import analyze_data
-import json
-import logging
 
 class LlamaController(BaseLLMController):
     router: APIRouter

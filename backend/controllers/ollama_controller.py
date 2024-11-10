@@ -15,7 +15,6 @@ class OllamaController():
     def register_additional_routes(self):
         self.router.add_api_route("/chat", self.chat_with_ollama, methods=["POST"], name="chat_with_ollama")
         self.router.add_api_route("/generate_code", self.generate_code, methods=["POST"], name="generate_code")
-        self.router.add_api_route("/generate_vendor_description", self.generate_vendor_description, methods=["POST"], name="generate_vendor_description")
     
     async def parse_reponse(response):
         formatted_response = ""
@@ -65,11 +64,5 @@ class OllamaController():
         formatted_response = await OllamaController.parse_reponse(response)
         return {"code": formatted_response}    
     
-    @staticmethod
-    async def generate_vendor_description(m: LModel):
-        # Implement the logic for generating vendor descriptions here
-        # This will be similar to your chat_with_ollama method
-        pass
-
 ollama_controller = OllamaController()
 router = ollama_controller.router
