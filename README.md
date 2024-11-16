@@ -101,3 +101,50 @@ _Just got GIT! Exploring the new paradigms after 15+ year no coding_
 
 
 ![alt text](_docs/image-3.png)
+
+---
+
+### To run this APP
+2024.11.16: Revisiting after 2 weeks, I realized that I do forget ;)  
+So here a small document!
+
+#### 1. Serve the backend
+   ```bash
+   source ./sbox1/bin/activate
+   fastapi run main.py --host 0.0.0.0 --port 8082
+   ```
+
+   If no error then following links will become available:
+  
+   - http://0.0.0.0:8082    
+   Backend can also be used to serve frontend matters, but now they (HTMX+Jinja) assets are removed! Opting for Svelte 5 instead.
+   ![alt text](_docs/image-3a.png)
+
+   - http://0.0.0.0:8082/docs    
+   FastAPI for its simplicity and ease of use, and the auto generated docs are also nice.  
+   ![alt text](_docs/image-1a.png)
+
+   - http://0.0.0.0:8082/redoc    
+   ![alt text](_docs/image-2a.png)
+
+   - http://0.0.0.0:8082/openapi.json   
+
+
+
+#### 2. Serve the frontend  (Storybook)
+   ```bash
+   source ./sbox1/bin/activate
+   cd frontend
+   npm run storybook 
+   ```
+![alt text](_docs/image-4a.png)
+
+
+
+#### 3. Serve the frontend
+   ```bash
+   source ./sbox1/bin/activate
+   cd frontend
+   npm run dev -- --open 
+   ```
+![alt text](_docs/image-5a.png)
