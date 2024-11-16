@@ -148,3 +148,13 @@ So here a small document!
    npm run dev -- --open 
    ```
 ![alt text](_docs/image-5a.png)
+
+
+---
+
+## __init__ vs namespace
+...
+
+
+## Concept of in-process, in-memory (DB & JSON), in-disk (ext files/contents)
+...
