@@ -209,8 +209,34 @@ from Joshua, [Traps for the Unwary in Python’s Import System](https://python-n
 - Removed all dunder inits, switched to **namespace** convention.
 - all codes in sandbag `backend.examples..` works
 - Both ollama `endpoints` (/chat & /generate_code)  works
-- All 3 llama `endpoints` (chat, /fuctions, /models) failed due to unimplemented validation errors! 
+- All 3 llama `endpoints` (chat, /fuctions, /models) also works, bu fails due to unimplemented validation errors! 
 
 
-### sanbag Concept of in-process, in-memory (DB & JSON), in-disk (ext files/contents)
+### Sandbag Concept for Files & Storage
+#### Files
+- few techniques were benchmarked by `backend.examples.data_generators.benchmark_1.py` to Write files
+- Writer `buffered_io_writer`	performed better, but CPython may outperform!
+- Synthetic data generator `backend.examples.data_generators.generate_people.py` uses `generate_schema_data.py`
+- `utils.generate_schema_data.py` uses `buffered_io_writer`, so @todo add this to `base.file.py` instead
+- add/use basic metadata of the files!
+
+#### Storage
+For memory/storage we opt for 3 embedded in-process packages, and structure/validation is the main focus: 
+, SQLite is an in-process RDBMS validated by Pydantic
+, TinyDB which is an in-process lightweight JSON DB, JSONs cab be validated by Cerebus
+, DuckDB which is in-process Analytic.
+, @todo: The LLM Context and it's state can have Jinja for structured I/O (use FastAPIs JinjaTemplate)
+
+Abstract representation of Person can be represented by SQLModel, as in `backend,models.person.py`
+Version of  the physical schema can be managed using Cerebus, as in `backend.nbs.02.SGen-DB-metadata-to-Schema.ipynb`
+Schema can be auto-generated from SQLModel and vices versa  `03.CGen-Schema-toSQLModel-class.ipynb`
+
+---
+
+### Next: Sanbox File & Storage
+**@todo: Start using codes from sandbags & Notebooks in Sandbox ...**
+**@todo: Use Postrges & complete CRUD on Tenant, Product & Category**
+
+
+
 ...
